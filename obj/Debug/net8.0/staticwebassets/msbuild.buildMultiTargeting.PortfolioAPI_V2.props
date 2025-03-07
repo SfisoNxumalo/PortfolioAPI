@@ -1,3 +1,0 @@
-﻿<Project>
-  <Import Project="..\build\PortfolioAPI_V2.props" />
-</Project>
