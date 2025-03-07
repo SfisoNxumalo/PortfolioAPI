@@ -21,7 +21,7 @@ namespace PortfolioAPI.Tests.UnitTests
         }
 
         [TestCase(1)]
-        [TestCase()]
+        [TestCase(3)]
         [TestCase(3)]
         public void GetMessageById_ReturnsOkResponse(int Id) //Naming
         {
@@ -124,7 +124,7 @@ namespace PortfolioAPI.Tests.UnitTests
             _mockMessageService.Setup(s => s.GetAllMessages()).Returns(ListOfMessages);
 
             // Act
-            var result = _messageController.GetMessage();
+            var result = _messageController.GetMessage(1);
 
             // Assert: Verify the result is OkObjectResult and status code is 200
             var okResult = result as OkObjectResult;

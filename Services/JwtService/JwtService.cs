@@ -9,7 +9,7 @@ namespace Services.JwtService
     public class JwtService
     {
 
-        pr
+
         public JwtService() { 
         
         }
