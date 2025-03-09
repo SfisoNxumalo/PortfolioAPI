@@ -11,6 +11,7 @@ namespace Infrastructure.Data
         public DbSet<MessageEntity> Message { get; set; }
         public DbSet<UserEntity> User { get; set; }
         public DbSet<GuestEntity> Guest { get; set; } 
+        public DbSet<AuthUserEntity> AuthUser { get; set; }
 
         //protected override void OnModelCreating(ModelBuilder modelBuilder)
         //{

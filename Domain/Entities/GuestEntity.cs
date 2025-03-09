@@ -4,12 +4,12 @@
     {
 
         public int Id { get; set; }
-        public string Name { get; set; }
+        public required string Name { get; set; }
 
-        public string Contact { get; set; }
+        public required string Contact { get; set; }
 
-        public string Email { get; set; }
+        public required string Email { get; set; }
 
-        public string Sender_uid { get; set; }
+        public required string Sender_uid { get; set; }
     }
 }

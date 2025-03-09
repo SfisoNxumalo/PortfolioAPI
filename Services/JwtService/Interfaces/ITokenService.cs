@@ -4,14 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Services.JwtService
+namespace Services.JwtService.Interfaces
 {
-    public class JwtService
+    public interface ITokenService
     {
-
-
-        public JwtService() { 
-        
-        }
+        public string EncodeToken();
     }
 }

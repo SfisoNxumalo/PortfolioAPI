@@ -1,4 +1,5 @@
 ﻿using Integrations.CustomExceptions;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using PortfolioAPI_V2.DTO;
 using Services.Interfaces.Services;
@@ -9,6 +10,7 @@ namespace PortfolioAPI_V2.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class MessageController : ControllerBase
     {
 
@@ -19,8 +21,8 @@ namespace PortfolioAPI_V2.Controllers
         public MessageController(IMessageServices messageService) {
             _messageService = messageService;
         }
-        
 
+        [AllowAnonymous]
         [HttpPost("SendMessage")]
         public async Task<IActionResult> SendMessage([FromBody] MessageDTO message)
         {
