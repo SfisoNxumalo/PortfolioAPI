@@ -7,6 +7,7 @@ using Integrations.Interfaces.Repositories;
 using Infrastructure.Data;
 using Integrations.Models;
 using Domain.Entities;
+using Integrations.CustomExceptions;
 
 namespace Integrations.Repository
 {
@@ -20,17 +21,42 @@ namespace Integrations.Repository
 
         public AuthUserEntity Login(LoginModel loginModel)
         {
-            var user = _dbContext.AuthUser.FirstOrDefault(
-                user => user.Email == loginModel.email && user.Password == loginModel.password
-            );
+            try
+            {
+                var user = _dbContext.AuthUser.FirstOrDefault(
+                    user => user.Email == loginModel.email && user.Password == loginModel.password
+                );
 
-            return user;
+                return user;
+            }
+            catch {
+                throw new DatabaseException("An unexpected error occurred while trying to find the user");
+            }
+            
 
         }
 
-        public string Register()
+        public bool Register(AuthUserEntity user)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var UserFound = _dbContext.AuthUser.FirstOrDefault(
+                    users => user.Email == users.Email
+                );
+
+                if (UserFound != null)
+                {
+                    throw new DatabaseException("A user with this email address already exists");
+                }
+
+                _dbContext.AuthUser.Add(user);
+                _dbContext.SaveChanges();
+
+                return true;
+            }
+            catch {
+                throw new DatabaseException("An unexpected error occurred while trying to register user");
+            }
         }
     }
 }

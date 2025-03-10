@@ -8,6 +8,6 @@ namespace Services.JwtService.Interfaces
 {
     public interface ITokenService
     {
-        public string EncodeToken();
+        public string EncodeToken(string Uid);
     }
 }

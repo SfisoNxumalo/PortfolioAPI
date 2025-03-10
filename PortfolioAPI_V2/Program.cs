@@ -11,6 +11,7 @@ using Services.Interfaces.Services;
 using Services.JwtService.Interfaces;
 using Services.JwtService.Services;
 using Services.Services;
+using Services.Services.Authentication;
 
 
 namespace PortfolioAPI_V2
@@ -50,7 +51,8 @@ namespace PortfolioAPI_V2
 
             builder.Services.AddScoped<IMessageRepository, MessageRepository>();
             builder.Services.AddScoped<IMessageServices, MessageService>();
-            //builder.Services.AddScoped<MessageService>();
+            builder.Services.AddScoped<IAuthRepository, AuthRepository>();
+            builder.Services.AddScoped<IAuthService, AuthService>();
             builder.Services.AddScoped<ITokenService, JwtService>();
 
             builder.Services.AddDbContext<DatabaseContext>(opt => { opt.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")); });
