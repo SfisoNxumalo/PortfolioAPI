@@ -35,6 +35,8 @@ namespace PortfolioAPI_V2
                     Name = "Authorization",
                     In = ParameterLocation.Header,
                     Scheme = JwtBearerDefaults.AuthenticationScheme,
+                    Type = SecuritySchemeType.Http,
+                    Description = "Enter your JWT access token",
                     Reference = new OpenApiReference
                     {
                         Id = JwtBearerDefaults.AuthenticationScheme,

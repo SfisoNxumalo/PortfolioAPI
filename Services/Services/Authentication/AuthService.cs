@@ -7,6 +7,7 @@ using Domain.Entities;
 using Integrations.Interfaces.Repositories;
 using Integrations.Models;
 using Integrations.Repository;
+using Services.DTO;
 using Services.Interfaces.Services;
 using Services.JwtService.Interfaces;
 using Services.ServiceExceptions;
@@ -50,20 +51,31 @@ namespace Services.Services.Authentication
             
         }
 
-        public bool Register(AuthUserEntity userEntity)
+        public bool Register(RegisterDTO userEntity)
         {
             if (userEntity == null)
             {
                 throw new NoContentException("Email and password are required");
             }
 
-            if (string.IsNullOrWhiteSpace(userEntity.Name) || string.IsNullOrWhiteSpace(userEntity.Contact)  
-                || string.IsNullOrWhiteSpace(userEntity.Email))
+            if (string.IsNullOrWhiteSpace(userEntity.Email) || string.IsNullOrWhiteSpace(userEntity.Password))
             {
                 throw new NoContentException("Please insert all the required fields");
             }
 
-            var userRegistered = _authRepo.Register(userEntity);
+            if (string.IsNullOrEmpty(userEntity.Uid))
+            {
+                userEntity.Uid = Convert.ToString(Guid.NewGuid())!;
+            }
+
+            var NewUser = new AuthUserEntity
+            {
+                Uid = userEntity.Uid,
+                Email = userEntity.Email,
+                Password = userEntity.Password
+            };
+
+            var userRegistered = _authRepo.Register(NewUser);
 
             if (!userRegistered)
             {

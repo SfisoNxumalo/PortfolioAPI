@@ -4,6 +4,7 @@ using Integrations.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
+using Services.DTO;
 using Services.Interfaces.Services;
 using Services.ServiceExceptions;
 
@@ -45,14 +46,17 @@ namespace PortfolioAPI_V2.Controllers
         }
 
         [HttpPost("register")]
-        public IActionResult Register(AuthUserEntity user)
+        public IActionResult Register(RegisterDTO user)
         {
 
             try
             {
                 var result = _authService.Register(user);
-
-                return Ok(result);
+                if (result)
+                {
+                    return Ok(result);
+                }
+                return Ok("unknown fail");
             }
             catch (DatabaseException DbE)
             {

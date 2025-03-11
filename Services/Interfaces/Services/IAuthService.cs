@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Domain.Entities;
 using Integrations.Models;
+using Services.DTO;
 
 namespace Services.Interfaces.Services
 {
@@ -13,6 +14,6 @@ namespace Services.Interfaces.Services
 
         public string Login(LoginModel loginModel);
 
-        public bool Register(AuthUserEntity userEntity);
+        public bool Register(RegisterDTO userEntity);
     }
 }
