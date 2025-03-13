@@ -54,7 +54,7 @@ namespace PortfolioAPI_V2.Controllers
                 var result = _authService.Register(user);
                 if (result)
                 {
-                    return Ok(result);
+                    return Ok("User registered successfully");
                 }
                 return Ok("unknown fail");
             }
